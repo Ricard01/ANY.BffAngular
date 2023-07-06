@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BffAngular.Controllers;
 
@@ -18,7 +19,9 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet]
+    [HttpGet(Name = "GetWeatherForecast")]
+    // [Requires(Permissions.OrderAllAccess)]
+    // [Authorize("RequireInteractiveUser")]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -29,4 +32,45 @@ public class WeatherForecastController : ControllerBase
             })
             .ToArray();
     }
+
+    [HttpGet("{hola}")]
+    public string Get(string hola)
+    {
+        
+        return hola;
+    }
+
+
+    // [HttpGet("Permissions")]
+    // [AllowAnonymous]
+    // public IEnumerable<Permissions> GetPermissionsEnumerable()
+    // {
+    //     var claims = HttpContext.User.Claims;
+    //     var permissionsClaim =
+    //         claims?.SingleOrDefault(c => c.Type == Constants.ClaimType);
+    //
+    //     return permissionsClaim?.Value.UnpackPermissionsFromString()!;
+    // }
+    //
+    // [HttpGet("And")]
+    // // [Requires(PermissionOperator.And, Permissions.UserAllAccess, Permissions.OrderCreate)]
+    // public IEnumerable<Permissions> GetAnd()
+    // {
+    //     var claims = HttpContext.User.Claims;
+    //     var permissionsClaim =
+    //         claims?.SingleOrDefault(c => c.Type == Constants.ClaimType);
+    //
+    //     return permissionsClaim?.Value.UnpackPermissionsFromString()!;
+    // }
+    //
+    // [HttpGet("Or")]
+    // // [Requires(PermissionOperator.Or, Permissions.UserAllAccess, Permissions.OrderCreate)]
+    // public IEnumerable<Permissions> GetOr()
+    // {
+    //     var claims = HttpContext.User.Claims;
+    //     var permissionsClaim =
+    //         claims?.SingleOrDefault(c => c.Type == Constants.ClaimType);
+    //
+    //     return permissionsClaim?.Value.UnpackPermissionsFromString()!;
+    // }
 }

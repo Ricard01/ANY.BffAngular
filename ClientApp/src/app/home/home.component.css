@@ -1,0 +1,18 @@
+.mat-raised-button {
+
+  width: 100%;
+}
+
+/* Border */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: black;
+}
+/* Font color */
+input.mat-input-element {
+  color: black;
+}
+
+.fullWidth{
+  width: 200px!important;
+  min-width: unset!important;
+}
